@@ -1,8 +1,8 @@
 package com.yliu.bean;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,7 +16,8 @@ public class User extends Bean{
 	private String password;
 	@NotEmpty(message="用户名不能为空！")
 	private String account;
-	@Column(length=11)
+	@NotEmpty(message="电话号码不能为空！")
+	@Size(min=11,max=11,message="电话长度必须为11")
 	private String phone;
 	
 	public String getName() {
