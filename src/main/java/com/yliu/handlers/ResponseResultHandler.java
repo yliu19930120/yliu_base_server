@@ -7,9 +7,8 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
-
 import com.yliu.bean.Result;
-import com.yliu.utils.JsonUtils;
+import com.yliu.enums.ReturnCodeEnum;
 
 /**
  * 统一的响应内容
@@ -30,7 +29,10 @@ public class ResponseResultHandler implements ResponseBodyAdvice<Object>{
 	public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType,
 			Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request,
 			ServerHttpResponse response) {
-		return new Result(body);
+		if(!(body instanceof Result)){
+//			return new Result(ReturnCodeEnum.PARAMETERS_NOT_SPECIFIED);
+		}
+		return body;
 	}
 
 }

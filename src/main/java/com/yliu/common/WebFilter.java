@@ -14,7 +14,6 @@ public class WebFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		chain.doFilter(request, response);
-		System.out.println("过滤器正常工作");
 	}
 
 }

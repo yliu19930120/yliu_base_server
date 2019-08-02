@@ -14,7 +14,6 @@ public class Result {
 	private int code;
 	private Object data;
 	
-	
 	public Result() {
 		super();
 	}
@@ -43,7 +42,20 @@ public class Result {
 		this.message = returnEnum.getMsg();
 		this.code = returnEnum.getCode();
 	}
-
+	
+	public static Result ok(Object data){
+		return new Result(data);
+	}
+	
+	public static Result ok(){
+		return new Result(ReturnCodeEnum.SUCCESS);
+	}
+	public static Result failue(ReturnCodeEnum returnEnum){
+		return new Result(returnEnum);
+	}
+	public static Result failue(){
+		return new Result(ReturnCodeEnum.UNKNOWN_ABNORMAL);
+	}
 	public String getMessage() {
 		return message;
 	}

@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
-
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 
@@ -26,8 +24,8 @@ public class JsonConfig {
          * TODO 第一个SerializerFeature.PrettyFormat可以省略，毕竟这会造成额外的内存消耗和流量，第二个是用来指定当属性值为null是是否输出：pro:null
 　　　　　 * SerializerFeature.SkipTransientField
          */
-        fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteMapNullValue);
-        fastJsonConfig.setDateFormat("yyyyMMdd HH:mm:ss");
+//        fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteMapNullValue);
+        fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
         //3处理中文乱码问题
         List<MediaType> fastMediaTypes = new ArrayList<>();
         fastMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);

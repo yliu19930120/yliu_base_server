@@ -19,7 +19,6 @@ public class WebInterceptor implements HandlerInterceptor{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		System.out.println("拦截器正常工作");
 	}
 
 
