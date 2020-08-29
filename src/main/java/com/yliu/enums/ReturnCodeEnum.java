@@ -6,8 +6,9 @@ public enum ReturnCodeEnum {
 	UNKNOWN_ABNORMAL(-1,"失败,未知异常"),
 	ACCOUNT_OR_PASSWORD_ERROR(-2,"用户名或密码不正确"),
 	ACCOUNT_EXISTS(-3,"用户已存在"),
-	PARAMETERS_NOT_SPECIFIED(-4,"接口返回参数不规范");
-	
+	PARAMETERS_NOT_SPECIFIED(-4,"表单参数异常"),
+	NOT_LOGIN(-5,"未登录");
+
 	private int code;
 	private String msg;
 	private ReturnCodeEnum(int code, String msg) {

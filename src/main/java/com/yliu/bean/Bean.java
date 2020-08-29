@@ -1,5 +1,6 @@
 package com.yliu.bean;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.EntityListeners;
@@ -19,29 +20,31 @@ public class Bean {
 	@GeneratedValue
 	private String id;
 	@CreatedDate
-	private Date createDate;
+	private LocalDateTime createDate;
 	@LastModifiedDate
-	private Date updateDate;
-	
+	private LocalDateTime updateDate;
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Date getCreateDate() {
+
+	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(Date createDate) {
+
+	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
 	}
 
-	public Date getUpdateDate() {
+	public LocalDateTime getUpdateDate() {
 		return updateDate;
 	}
-	public void setUpdateDate(Date updateDate) {
+
+	public void setUpdateDate(LocalDateTime updateDate) {
 		this.updateDate = updateDate;
 	}
-	
-	
 }

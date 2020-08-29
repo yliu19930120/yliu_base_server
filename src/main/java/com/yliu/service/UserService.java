@@ -6,11 +6,38 @@ import java.util.Optional;
 
 import javax.persistence.EntityExistsException;
 
-import com.yliu.bean.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public interface UserService {
+import com.yliu.bean.User;
+import com.yliu.dao.UserRepository;
+import com.yliu.utils.PasswordUtils;
+
+@Service
+public class UserService {
 	
-	User save(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException,EntityExistsException;
+	@Autowired
+	private UserRepository repository;
 	
-	Optional<User> login(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException;
+	public User save(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException
+	,EntityExistsException{
+		Optional<User> op = repository.findOneByAccount(user.getAccount());
+		if(op.isPresent()){
+			throw new EntityExistsException("用户已存在");
+		}
+		user.setPassword(PasswordUtils.encodeByMd5(user.getPassword()));
+		User returnUser = repository.save(user);
+		return returnUser;
+	}
+
+	public Optional<User> login(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		Optional<User> op = repository.findOneByAccountAndPassword(
+				user.getAccount(), PasswordUtils.encodeByMd5(user.getPassword()));
+		return op;
+	}
+
+	public Optional<User> findOneById(String id) {
+		return repository.findOneById(id);
+	}
+
 }
