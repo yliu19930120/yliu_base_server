@@ -9,6 +9,7 @@ import com.yliu.constant.BaseConst;
 import com.yliu.enums.ReturnCodeEnum;
 import com.yliu.exception.LoginException;
 import com.yliu.service.UserService;
+import com.yliu.utils.IdentityUtils;
 import com.yliu.utils.TokenUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -26,6 +27,8 @@ import java.util.Optional;
  * 2019年4月15日 下午9:07:20
  */
 public class LoginInterceptor extends HandlerInterceptorAdapter{
+
+
 
 	private UserService userService;
 
@@ -55,13 +58,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 
 		String token = request.getHeader(BaseConst.TOKEN_KEY);
 
-		if(StringUtils.isBlank(token)){
+		if(StringUtils.isBlank(token)||"null".equals(token)){
 			throw new LoginException(ReturnCodeEnum.NOT_LOGIN.getMsg());
 		}else {
 			String userId = TokenUtils.decodeToken(token);
 			Optional<User> user = userService.findOneById(userId);
 			if(!user.isPresent()){
 				throw new LoginException(ReturnCodeEnum.ACCOUNT_EXISTS.getMsg());
+			}else {
+				IdentityUtils.set(user.get());
 			}
 		}
 

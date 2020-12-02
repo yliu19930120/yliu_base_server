@@ -25,6 +25,8 @@ public class WebConfig implements WebMvcConfigurer{
 
 	@Value("${yliu.auth}")
 	private boolean auth;
+	@Value("${yliu.cross}")
+	private boolean cross;
 	//白名单
 	private static final String[] AUTH_WHITELIST = {
 			"/",
@@ -43,9 +45,10 @@ public class WebConfig implements WebMvcConfigurer{
 	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-
-		InterceptorRegistration crosRegistration = registry.addInterceptor(new CrosInterceptor());
-		crosRegistration.addPathPatterns("/**");
+		if(cross){
+			InterceptorRegistration crosRegistration = registry.addInterceptor(new CrosInterceptor());
+			crosRegistration.addPathPatterns("/**");
+		}
 		if(auth){
 			InterceptorRegistration registration = registry.addInterceptor(new LoginInterceptor(userService));
 			registration.addPathPatterns("/**");

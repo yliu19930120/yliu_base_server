@@ -82,4 +82,8 @@ public class BaseService <T,ID,V, M extends MongoRepository<T,ID>>{
         Optional<T> one = repository.findOne(example);
         return one.isPresent()?Utils.copy(one.get(),voClass):null;
     }
+
+    public void deleteById(ID id){
+        repository.deleteById(id);
+    }
 }
