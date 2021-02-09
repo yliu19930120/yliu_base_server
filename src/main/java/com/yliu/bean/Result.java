@@ -9,38 +9,38 @@ import com.yliu.enums.ReturnCodeEnum;
  * 2019年4月15日 下午8:59:48
  */
 public class Result<T> extends BaseResult{
-	
+
 	private T data;
-	
+
 	public Result() {
 		super();
 	}
-	
+
 	public Result(String message, int code, T data) {
 		super();
 		super.message = message;
 		super.code = code;
 		this.data = data;
 	}
-	
+
 	public Result(T data) {
 		super();
 		this.data = data;
 	}
-	
+
 	public Result(String message, int code) {
 		super();
 		super.message = message;
 		super.code = code;
 	}
 
-	
+
 	public Result(ReturnCodeEnum returnEnum) {
 		super();
 		super.message = returnEnum.getMsg();
 		super.code = returnEnum.getCode();
 	}
-	
+
 	public static<T> Result ok(T data){
 		return new Result(data);
 	}
@@ -86,6 +86,6 @@ public class Result<T> extends BaseResult{
 	public void setData(T data) {
 		this.data = data;
 	}
-	
-	
+
+
 }

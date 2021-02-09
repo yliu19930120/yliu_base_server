@@ -6,19 +6,19 @@ import java.util.Optional;
 
 import javax.persistence.EntityExistsException;
 
+import com.yliu.utils.PasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yliu.bean.User;
 import com.yliu.dao.UserRepository;
-import com.yliu.utils.PasswordUtils;
 
 @Service
 public class UserService {
-	
+
 	@Autowired
 	private UserRepository repository;
-	
+
 	public User save(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException
 	,EntityExistsException{
 		Optional<User> op = repository.findOneByAccount(user.getAccount());
