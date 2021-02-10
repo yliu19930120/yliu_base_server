@@ -39,7 +39,7 @@ public class UserController extends BaseController{
 		log.info("用户{}注册",user.getAccount());
 		try {
 			User reUser = userService.save(user);
-			return Result.ok(TokenUtils.getToken(reUser));
+			return Result.ok(new User(reUser.getId(),TokenUtils.getToken(reUser)));
 		} catch (EntityExistsException e) {
 			log.warn("用户{}已存在",user.getAccount());
 			return Result.failue(ReturnCodeEnum.ACCOUNT_EXISTS);
@@ -52,7 +52,7 @@ public class UserController extends BaseController{
 		Optional<User> op = userService.login(user);
 		if(op.isPresent()){
 			log.info("用户{}登录成功",user.getAccount());
-			return Result.ok(TokenUtils.getToken(op.get()));
+			return Result.ok(new User(op.get().getId(),TokenUtils.getToken(op.get())));
 		}
 		return Result.failue(ReturnCodeEnum.ACCOUNT_OR_PASSWORD_ERROR);
 	}
