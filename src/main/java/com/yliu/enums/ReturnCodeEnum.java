@@ -1,13 +1,15 @@
 package com.yliu.enums;
 
 public enum ReturnCodeEnum {
-	
+
 	SUCCESS(0,"成功"),
 	UNKNOWN_ABNORMAL(-1,"失败,未知异常"),
 	ACCOUNT_OR_PASSWORD_ERROR(-2,"用户名或密码不正确"),
 	ACCOUNT_EXISTS(-3,"用户已存在"),
 	PARAMETERS_NOT_SPECIFIED(-4,"表单参数异常"),
-	NOT_LOGIN(-5,"未登录");
+	NOT_LOGIN(-5,"未登录"),
+	TOKEN_INVALID(-5,"token无效"),
+	;
 
 	private int code;
 	private String msg;
@@ -27,5 +29,5 @@ public enum ReturnCodeEnum {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-	
+
 }

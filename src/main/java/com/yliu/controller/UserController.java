@@ -56,4 +56,17 @@ public class UserController extends BaseController{
 		}
 		return Result.failue(ReturnCodeEnum.ACCOUNT_OR_PASSWORD_ERROR);
 	}
+
+	@Login(required = false)
+	@PostMapping("/valid")
+	public Result tokenValid(@RequestBody User user) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+		String userId = TokenUtils.decodeToken(user.getToken());
+		Optional<User> op = userService.findOneById(userId);
+		if(op.isPresent()){
+			log.info("token有效",user.getId());
+			return Result.ok(new User(op.get().getId(),TokenUtils.getToken(op.get())));
+		}
+		return Result.failue(ReturnCodeEnum.TOKEN_INVALID);
+	}
+
 }
