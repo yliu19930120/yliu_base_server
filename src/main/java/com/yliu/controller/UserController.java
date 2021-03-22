@@ -59,8 +59,11 @@ public class UserController extends BaseController{
 
 	@Login(required = false)
 	@PostMapping("/valid")
-	public Result tokenValid(@RequestBody User user) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+	public Result tokenValid(@RequestBody User user){
 		String userId = TokenUtils.decodeToken(user.getToken());
+		if(userId==null){
+			return Result.failue(ReturnCodeEnum.TOKEN_INVALID);
+		}
 		Optional<User> op = userService.findOneById(userId);
 		if(op.isPresent()){
 			log.info("token有效",user.getId());

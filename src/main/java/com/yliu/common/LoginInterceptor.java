@@ -62,9 +62,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			throw new LoginException(ReturnCodeEnum.NOT_LOGIN.getMsg());
 		}else {
 			String userId = TokenUtils.decodeToken(token);
+			if(userId==null){
+				throw new LoginException(ReturnCodeEnum.TOKEN_INVALID.getMsg());
+			}
 			Optional<User> user = userService.findOneById(userId);
 			if(!user.isPresent()){
-				throw new LoginException(ReturnCodeEnum.ACCOUNT_EXISTS.getMsg());
+				throw new LoginException(ReturnCodeEnum.ACCOUNT_NOT_EXISTS.getMsg());
 			}else {
 				IdentityUtils.set(user.get());
 			}
